@@ -29,22 +29,42 @@ function get_users(code,openid){
         weichat_apis[code] = new WechatAPI(config.appid, config.appsecret);
     }
     var client = weichat_apis[code];
-    client.getFollowers(openid,function(err,reslut){
-    	console.log(reslut);
-    	async.eachLimit(reslut.data.openid,10,function(openid,callback){
-    		var item = {'openid':openid,'code':code};
-    		UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
-				if(err){
-					console.log(err);
-				}
-				callback(null);
-			});
-    	},function(error){
-    		if(reslut.next_openid){
-    			get_users(code,reslut.next_openid);
-    		}
-    	});
-    });
+    if(!openid){
+        client.getFollowers(openid,function(err,reslut){
+            console.log(reslut);
+            async.eachLimit(reslut.data.openid,10,function(openid,callback){
+                var item = {'openid':openid,'code':code};
+                UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
+                    if(err){
+                        console.log(err);
+                    }
+                    callback(null);
+                });
+            },function(error){
+                if(reslut.next_openid){
+                    get_users(code,reslut.next_openid);
+                }
+            });
+        });
+    }else{
+        client.getFollowers(function(err,reslut){
+            console.log(reslut);
+            async.eachLimit(reslut.data.openid,10,function(openid,callback){
+                var item = {'openid':openid,'code':code};
+                UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
+                    if(err){
+                        console.log(err);
+                    }
+                    callback(null);
+                });
+            },function(error){
+                if(reslut.next_openid){
+                    get_users(code,reslut.next_openid);
+                }
+            });
+        });
+    }
+    
 }
 
 get_all()
