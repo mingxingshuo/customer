@@ -30,7 +30,7 @@ function get_users(code,openid){
         weichat_apis[code] = new WechatAPI(config.appid, config.appsecret);
     }
     var client = weichat_apis[code];
-    if(!openid){
+    if(openid){
         client.getFollowers(openid,function(err,reslut){
             console.log(reslut);
             async.eachLimit(reslut.data.openid,10,function(openid,callback){
