@@ -33,36 +33,41 @@ function get_users(code,openid){
     if(openid){
         client.getFollowers(openid,function(err,reslut){
             console.log(reslut);
-            async.eachLimit(reslut.data.openid,10,function(openid,callback){
-                var item = {'openid':openid,'code':code};
-                UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
-                    if(err){
-                        console.log(err);
+            if(reslut.data.openid){
+                async.eachLimit(reslut.data.openid,10,function(openid,callback){
+                    var item = {'openid':openid,'code':code};
+                    UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
+                        if(err){
+                            console.log(err);
+                        }
+                        callback(null);
+                    });
+                },function(error){
+                    if(reslut.next_openid){
+                        get_users(code,reslut.next_openid);
                     }
-                    callback(null);
                 });
-            },function(error){
-                if(reslut.next_openid){
-                    get_users(code,reslut.next_openid);
-                }
-            });
+            }
+            
         });
     }else{
         client.getFollowers(function(err,reslut){
             console.log(reslut);
-            async.eachLimit(reslut.data.openid,10,function(openid,callback){
-                var item = {'openid':openid,'code':code};
-                UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
-                    if(err){
-                        console.log(err);
+            if(reslut.data.openid){
+                async.eachLimit(reslut.data.openid,10,function(openid,callback){
+                    var item = {'openid':openid,'code':code};
+                    UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
+                        if(err){
+                            console.log(err);
+                        }
+                        callback(null);
+                    });
+                },function(error){
+                    if(reslut.next_openid){
+                        get_users(code,reslut.next_openid);
                     }
-                    callback(null);
                 });
-            },function(error){
-                if(reslut.next_openid){
-                    get_users(code,reslut.next_openid);
-                }
-            });
+            }
         });
     }
     
