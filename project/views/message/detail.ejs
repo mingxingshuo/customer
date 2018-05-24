@@ -1,0 +1,47 @@
+<%- include('../layout/header') %>
+<div style="text-align: center;margin-bottom: 30px;">
+  <a href="/message/" class="button" style="width: 200px;margin: 20px auto;">返回主页</a>
+</div>
+
+<form action="/message/update/<%=message._id%>" method="post" enctype="multipart/form-data">
+<div class="hang">
+	<span>类型  ：</span>
+	<select name="type">
+		<option value="0" <%= message.type==0?'selected':''%> >图文消息</option>
+		<option value="1" <%= message.type==1?'selected':''%>>文本消息</option>
+	</select>
+</div>
+
+<div class="hang">
+	<span>图片  ：</span>
+	<input name="file" type="file" />
+	<span><img style="width:100px" src="<%= message.img%>"/>
+</div>
+
+<div class="hang">
+	<span>标题  ：</span>
+	<input name="title" type="text" value="<%= message.title%>"/>
+</div>
+
+<div class="hang">
+	<span>链接  ：</span>
+	<input name="url" type="text" value="<%= message.url%>"/>
+</div>
+
+<div class="hang">
+	<span>详细信息：</span>
+	<textarea name="des" style="width: 300px;height: 70px"><%= message.des%></textarea>
+</div>
+
+<div class="hang">
+	<span>公众号 ：</span>
+	<% for(var item in codes) {%>
+	<div><input type="checkbox" name="codes[]" value="<%= codes[item].code %>" <%= message.codes.indexOf(codes[item].code)!=-1?'checked':'' %>><span><%= codes[item].name %></span></div>
+	<%}%>
+</div>
+<div class="hang">
+	<input type="submit" name="submit" text="提交"/>
+</div>
+
+</form>
+<%- include('../layout/footer') %>

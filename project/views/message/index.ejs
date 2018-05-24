@@ -1,0 +1,38 @@
+<%- include('../layout/header') %>
+
+<div style="text-align: center;margin-bottom: 30px;">
+  <a href="/message/create" class="button" style="width: 200px;margin: 20px auto;">添加信息</a>
+</div>
+
+<div>
+	<table style="margin:auto"	>
+	    <thead>
+	      <tr>
+	        <td>类型</td>
+	        <td>标题</td>
+	        <td>详细信息</td>
+	        <td>链接</td>
+	        <td>图片</td>
+	        <td style="width: 200px;">操作</td>
+	      </tr>
+	    </thead>
+	    <tbody id="data">
+	    	<% for(var index in messages){%>
+	    		<tr>
+			        <td> <%=messages[index].type == 0?'图文':'文字'%> </td>
+			        <td> <%=messages[index].title%> </td>
+			        <td> <%=messages[index].des%> </td>
+			        <td> <%=messages[index].url%> </td>
+			        <td><img style="width:200px;" src="<%=messages[index].img%>"></td>
+			        <td style="width: 200px;">
+			        	<a class="button" href="/message/detail/<%=messages[index]._id%>" >修改</a>
+			        	<a class="button" href="/message/send/<%=messages[index]._id%>" >发送信息</a>
+			        </td>
+			    </tr>
+	    	<%}%>
+	 	</tbody>
+	</table>
+</div>
+
+
+<%- include('../layout/footer') %>
