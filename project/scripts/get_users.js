@@ -33,7 +33,7 @@ function get_users(code,openid){
     if(openid){
         client.getFollowers(openid,function(err,reslut){
             console.log(reslut);
-            if(reslut.data.openid){
+            if(reslut.data && reslut.data.openid){
                 async.eachLimit(reslut.data.openid,10,function(openid,callback){
                     var item = {'openid':openid,'code':code};
                     UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
@@ -53,7 +53,7 @@ function get_users(code,openid){
     }else{
         client.getFollowers(function(err,reslut){
             console.log(reslut);
-            if(reslut.data.openid){
+            if(reslut.data && reslut.data.openid){
                 async.eachLimit(reslut.data.openid,10,function(openid,callback){
                     var item = {'openid':openid,'code':code};
                     UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
