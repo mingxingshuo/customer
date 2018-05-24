@@ -24,11 +24,11 @@ function find_users(code) {
 }
 
 function get_users(code,openid){
-	if (!weichat_apis[user.code]) {
-        var config = weichat_conf[user.code];
-        weichat_apis[user.code] = new WechatAPI(config.appid, config.appsecret);
+	if (!weichat_apis[code]) {
+        var config = weichat_conf[code];
+        weichat_apis[code] = new WechatAPI(config.appid, config.appsecret);
     }
-    var client = weichat_apis[user.code];
+    var client = weichat_apis[code];
     client.getFollowers(openid,function(err,reslut){
     	console.log(reslut);
     	async.eachLimit(reslut.data.openid,10,function(openid,callback){
