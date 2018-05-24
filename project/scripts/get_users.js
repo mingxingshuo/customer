@@ -24,6 +24,7 @@ function find_users(code) {
 }
 
 function get_users(code,openid){
+    console.log('code : '+code+' , openid : '+ openid);
 	if (!weichat_apis[code]) {
         var config = weichat_conf[code];
         weichat_apis[code] = new WechatAPI(config.appid, config.appsecret);
