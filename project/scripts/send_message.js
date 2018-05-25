@@ -33,7 +33,7 @@ function send_users(user_id,message){
 				   "picurl":message.img
 				 }];
 
-				api.sendNews(user.openid, articles, function(err,res){
+				client.sendNews(user.openid, articles, function(err,res){
 					console.log(error);
 					callback(null)
 				});
