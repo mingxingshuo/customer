@@ -1,7 +1,6 @@
 var WechatAPI = require('wechat-api');
 var weichat_conf = require('../conf/weichat.json');
 var weichat_apis = {};
-
 var MessageModel = require('../model/Message');
 var UserModel = require('../model/User');
 var async = require('async');
@@ -9,6 +8,7 @@ var flag =false;
 
 function get_message(id) {
 	flag =true;
+	var weichat_apis = {};
 	MessageModel.findById(id).exec(function(err,message){
 		if(message){
 			send_users(null,message);
