@@ -34,7 +34,7 @@ function send_users(user_id,message){
 				 }];
 
 				client.sendNews(user.openid, articles, function(err,res){
-					console.log(error);
+					console.log(err);
 					callback(null)
 				});
             }else if(message.type==1){
