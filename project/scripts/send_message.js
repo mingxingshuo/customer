@@ -37,7 +37,7 @@ function send_users(user_id,message){
 					console.log(error);
 					callback(null)
 				});
-            }elseif(message.type==1){
+            }else if(message.type==1){
             	client.sendText(user.openid,message.des,function(error,res){
             		console.log(error);
             		callback(null)

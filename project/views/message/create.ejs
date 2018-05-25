@@ -11,17 +11,17 @@
 	</select>
 </div>
 
-<div class="hang">
+<div class="hang tuwen">
 	<span>图片  ：</span>
 	<input name="file" type="file" />
 </div>
 
-<div class="hang">
+<div class="hang tuwen">
 	<span>标题  ：</span>
 	<input name="title" type="text" />
 </div>
 
-<div class="hang">
+<div class="hang tuwen">
 	<span>链接  ：</span>
 	<input name="url" type="text" />
 </div>
@@ -42,4 +42,24 @@
 </div>
 
 </form>
+
+<script type="text/javascript">
+	function change_type() {
+		var type = $('select[name="type"]').val();
+		
+		if(type==1){
+			$('.tuwen').hide()
+		}else{
+			$('.tuwen').show()
+		}
+	}
+	$(function(){
+		change_type();
+		$('select[name="type"]').on('change',function(){
+			change_type();
+		})
+	});
+	
+</script>
+
 <%- include('../layout/footer') %>
