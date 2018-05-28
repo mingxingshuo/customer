@@ -8,7 +8,7 @@ var flag =false;
 
 function get_message(id) {
 	flag =true;
-	var weichat_apis = {};
+	weichat_apis = {};
 	MessageModel.findById(id).exec(function(err,message){
 		if(message){
 			send_users(null,message);
