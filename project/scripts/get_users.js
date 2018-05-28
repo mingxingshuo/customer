@@ -75,7 +75,7 @@ function get_users(code,openid){
 
 get_all()
 
-schedule.scheduleJob('* * * 1 * *', function(){
+schedule.scheduleJob('* * 1 * * *', function(){
         console.log('scheduleCronstyle:' + new Date());
         get_all()
  });
