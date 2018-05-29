@@ -8,22 +8,24 @@ var UserModel = require('../model/User');
 var async = require('async');
 
 function get_all(){
+    var codes = [];
 	for(var code in weichat_conf){
-		find_users(code)
+		codes.push(code)
 	}
+    async.each(codes,function(code,callback){
+        find_users(code,callback)
+    },function(err,res){
+        console.log('---------user update--end-----------')
+    });
 }
 
-function find_users(code) {
-	UserModel.find({code:code}).sort({'_id':-1}).limit(1).exec(function(error,users){
-		if(users&&users.length>0){
-			get_users(code,users[0].openid)
-		}else{
-			get_users(code,null)
-		}
-	});
+function find_users(code,callback) {
+    UserModel.remove({code:code},function(err,doc){
+        get_users(code,null,callback);
+    });
 }
 
-function get_users(code,openid){
+function get_users(code,openid,next){
     console.log('code : '+code+' , openid : '+ openid);
 	if (!weichat_apis[code]) {
         var config = weichat_conf[code];
@@ -44,7 +46,10 @@ function get_users(code,openid){
                     });
                 },function(error){
                     if(reslut.next_openid){
-                        get_users(code,reslut.next_openid);
+                        get_users(code,reslut.next_openid,next);
+                    }else{
+                        console.log('-----------code -------'+code+'---------update--end')
+                        next(null)
                     }
                 });
             }
@@ -64,25 +69,28 @@ function get_users(code,openid){
                     });
                 },function(error){
                     if(reslut.next_openid){
-                        get_users(code,reslut.next_openid);
+                        get_users(code,reslut.next_openid,next);
+                    }else{
+                        console.log('-----------code -------'+code+'---------update--end')
+                        next(null)
                     }
                 });
             }
         });
-    }
-    
+    }   
 }
 
 get_all()
 
 var rule = new schedule.RecurrenceRule();
-var times = [1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+var times = [1, 9, 12, 15, 18, 21, 24];
 rule.hour = times;
 rule.minute = 0;
 var j = schedule.scheduleJob(rule, function () {
     console.log('scheduleCronstyle:' + new Date());
     get_all()
 });
+
 
 /*schedule.scheduleJob('* * 1 * * *', function(){
         console.log('scheduleCronstyle:' + new Date());
