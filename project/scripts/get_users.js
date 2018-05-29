@@ -75,9 +75,18 @@ function get_users(code,openid){
 
 get_all()
 
-schedule.scheduleJob('* * 1 * * *', function(){
+var rule = new schedule.RecurrenceRule();
+var times = [1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+rule.hour = times;
+rule.minute = 0;
+var j = schedule.scheduleJob(rule, function () {
+    console.log('scheduleCronstyle:' + new Date());
+    get_all()
+});
+
+/*schedule.scheduleJob('* * 1 * * *', function(){
         console.log('scheduleCronstyle:' + new Date());
         get_all()
- });
+ });*/
 
 module.exports.get_all = get_all
