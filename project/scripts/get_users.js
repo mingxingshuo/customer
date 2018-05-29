@@ -52,6 +52,9 @@ function get_users(code,openid,next){
                         next(null)
                     }
                 });
+            }else{
+                console.log('-----------code -------'+code+'---------update--end')
+                next(null)
             }
             
         });
@@ -75,6 +78,9 @@ function get_users(code,openid,next){
                         next(null)
                     }
                 });
+            }else{
+                console.log('-----------code -------'+code+'---------update--end')
+                next(null)
             }
         });
     }   
