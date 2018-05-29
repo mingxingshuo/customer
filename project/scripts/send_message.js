@@ -35,12 +35,17 @@ function send_users(user_id,message){
 
 				client.sendNews(user.openid, articles, function(err,res){
 					console.log(err);
-					callback(null)
+					setTimeout(function(){
+						callback(null)
+					},50)
+					
 				});
             }else if(message.type==1){
             	client.sendText(user.openid,message.des,function(error,res){
             		console.log(error);
-            		callback(null)
+            		setTimeout(function(){
+						callback(null)
+					},50)
             	})
             }
 		},function(err){
