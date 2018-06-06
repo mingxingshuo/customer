@@ -35,7 +35,8 @@ function get_users(code,openid,next){
     if(openid){
         client.getFollowers(openid,function(err,reslut){
             if(err){
-                console.err(err)
+                console.log('-------getFollowers error-------')
+                console.log(err)
             }
             console.log(reslut);
             if(reslut.data && reslut.data.openid){
@@ -65,7 +66,8 @@ function get_users(code,openid,next){
     }else{
         client.getFollowers(function(err,reslut){
             if(err){
-                console.err(err)
+                console.log('-------getFollowers error-------')
+                console.log(err)
             }
             console.log(reslut);
             if(reslut.data && reslut.data.openid){
