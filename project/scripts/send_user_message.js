@@ -1,6 +1,6 @@
 var wechat_util = require('../util/get_weichat_client');
 var MessageModel = require('../model/Message');
-var UserModel = require('../model/User');
+var FuUserModel = require('../model/FuUser');
 var async = require('async');
 var flags ={};
 
@@ -18,12 +18,13 @@ function get_message(id) {
 	}else{
 		console.log('============= 当前信息正在执行中 ==========')
 	}
+	
 }
 
 function send_users(user_id,message){
-	UserModel.fetch(user_id,message.codes,function(err,users){
+	FuUserModel.fetch(user_id,message.codes,function(err,users){
 		async.eachLimit(users,10,function(user,callback){
-            var client = wechat_util.getClient(user.code);
+			var client = wechat_util.getClient(user.code);
             if(message.type==0){
             	var articles = [
 				 {

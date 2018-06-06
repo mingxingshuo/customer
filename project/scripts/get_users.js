@@ -34,6 +34,9 @@ function get_users(code,openid,next){
     var client = weichat_apis[code];
     if(openid){
         client.getFollowers(openid,function(err,reslut){
+            if(err){
+                console.err(err)
+            }
             console.log(reslut);
             if(reslut.data && reslut.data.openid){
                 async.eachLimit(reslut.data.openid,10,function(openid,callback){
@@ -46,6 +49,7 @@ function get_users(code,openid,next){
                     });
                 },function(error){
                     if(reslut.next_openid){
+                        console.log('-----------code -------'+code+'---------update--contitue------')
                         get_users(code,reslut.next_openid,next);
                     }else{
                         console.log('-----------code -------'+code+'---------update--end')
@@ -60,6 +64,9 @@ function get_users(code,openid,next){
         });
     }else{
         client.getFollowers(function(err,reslut){
+            if(err){
+                console.err(err)
+            }
             console.log(reslut);
             if(reslut.data && reslut.data.openid){
                 async.eachLimit(reslut.data.openid,10,function(openid,callback){
@@ -72,6 +79,7 @@ function get_users(code,openid,next){
                     });
                 },function(error){
                     if(reslut.next_openid){
+                        console.log('-----------code -------'+code+'---------update--contitue------')
                         get_users(code,reslut.next_openid,next);
                     }else{
                         console.log('-----------code -------'+code+'---------update--end')
