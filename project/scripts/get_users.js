@@ -1,8 +1,7 @@
 var schedule = require("node-schedule");
 
-var WechatAPI = require('wechat-api');
+var wechat_util = require('../util/get_weichat_client');
 var weichat_conf = require('../conf/weichat.json');
-var weichat_apis = {};
 
 var UserModel = require('../model/User');
 var async = require('async');
@@ -12,7 +11,7 @@ function get_all(){
 	for(var code in weichat_conf){
 		codes.push(code)
 	}
-    async.each(codes,function(code,callback){
+    async.eachLimit(codes,2,function(code,callback){
         find_users(code,callback)
     },function(err,res){
         console.log('---------user update--end-----------')
@@ -27,11 +26,7 @@ function find_users(code,callback) {
 
 function get_users(code,openid,next){
     console.log('code : '+code+' , openid : '+ openid);
-	if (!weichat_apis[code]) {
-        var config = weichat_conf[code];
-        weichat_apis[code] = new WechatAPI(config.appid, config.appsecret);
-    }
-    var client = weichat_apis[code];
+	var client = wechat_util.getClient(code);
     if(openid){
         client.getFollowers(openid,function(err,reslut){
             if(err){
@@ -130,10 +125,10 @@ function get_users(code,openid,next){
                 next(null)
             }
         });
-    }   
+    }  
 }
 
-get_all()
+//get_all()
 
 var rule = new schedule.RecurrenceRule();
 var times = [1, 9, 12, 15, 18, 21, 24];

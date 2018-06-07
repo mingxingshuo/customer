@@ -5,13 +5,13 @@ var async = require('async');
 var flags ={};
 
 function get_message(id) {
-	if(!flag[id]){
-		flag[id] = true;
+	if(!flags[id]){
+		flags[id] = true;
 		MessageModel.findById(id).exec(function(err,message){
 			if(message){
 				send_users(null,message);
 			}else{
-				flag[id] = false;
+				flags[id] = false;
 				console.log('============= 未找到信息 ==========')
 			}
 		});
@@ -53,7 +53,7 @@ function send_users(user_id,message){
 			if(users.length==50){
 				send_users(users[49]._id,message);
 			}else{
-				flag[message._id] = false;
+				flags[message._id] = false;
 			}
 		})
 	});
