@@ -40,7 +40,26 @@ function get_users(code,openid,next){
             }
             console.log(reslut);
             if(reslut && reslut.data && reslut.data.openid){
-                async.eachLimit(reslut.data.openid,10,function(openid,callback){
+                var users=[];
+                for (var index in reslut.data.openid) {
+                    users.push({'openid':reslut.data.openid[index],'code':code});
+                }
+                UserModel.insertMany(users,function(error,docs){
+                    if(error){
+                        console.log('------insertMany error--------');
+                        console.log(error);
+                        console.log('------------------------------');
+                    }
+                    if(reslut.next_openid){
+                    console.log('-----------code -------'+code+'---------update--contitue------')
+                        get_users(code,reslut.next_openid,next);
+                    }else{
+                        console.log('-----------code -------'+code+'---------update--end')
+                        next(null)
+                    }
+                })
+                
+                /*async.eachLimit(reslut.data.openid,10,function(openid,callback){
                     var item = {'openid':openid,'code':code};
                     UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
                         if(err){
@@ -56,9 +75,9 @@ function get_users(code,openid,next){
                         console.log('-----------code -------'+code+'---------update--end')
                         next(null)
                     }
-                });
+                });*/
             }else{
-                console.log('-----------code -------'+code+'---------update--end')
+                console.log('not have openid arr-----------code -------'+code+'---------update--end')
                 next(null)
             }
             
@@ -71,7 +90,25 @@ function get_users(code,openid,next){
             }
             console.log(reslut);
             if(reslut && reslut.data && reslut.data.openid){
-                async.eachLimit(reslut.data.openid,10,function(openid,callback){
+                var users=[];
+                for (var index in reslut.data.openid) {
+                    users.push({'openid':reslut.data.openid[index],'code':code});
+                }
+                UserModel.insertMany(users,function(error,docs){
+                    if(error){
+                        console.log('------insertMany error--------');
+                        console.log(error);
+                        console.log('------------------------------');
+                    }
+                    if(reslut.next_openid){
+                    console.log('-----------code -------'+code+'---------update--contitue------')
+                        get_users(code,reslut.next_openid,next);
+                    }else{
+                        console.log('-----------code -------'+code+'---------update--end')
+                        next(null)
+                    }
+                })
+                /*async.eachLimit(reslut.data.openid,10,function(openid,callback){
                     var item = {'openid':openid,'code':code};
                     UserModel.findOneAndUpdate(item,item,{upsert:true,rawResult:true},function(err,result){
                         if(err){
@@ -87,16 +124,16 @@ function get_users(code,openid,next){
                         console.log('-----------code -------'+code+'---------update--end')
                         next(null)
                     }
-                });
+                });*/
             }else{
-                console.log('-----------code -------'+code+'---------update--end')
+                console.log('not have openid arr -----------code -------'+code+'---------update--end')
                 next(null)
             }
         });
     }   
 }
 
-//get_all()
+get_all()
 
 var rule = new schedule.RecurrenceRule();
 var times = [1, 9, 12, 15, 18, 21, 24];
