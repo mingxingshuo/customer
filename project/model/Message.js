@@ -12,10 +12,10 @@ var MessageSchema = new Schema({
   delay: Number,
   des:String,
   contents:[{
-    img:String,
-    url:String,
     title:String,
-    des:String
+    description:String,
+    url:String,
+    picurl:String
   }],
   codes:[String],
   createAt: {
@@ -30,6 +30,22 @@ var MessageSchema = new Schema({
     timestamps: { createdAt: 'createAt', updatedAt: 'updateAt' }
 });
 
+MessageSchema.statics = {
+    fetch(id,codes, cb) {
+        if (id) {
+            return this.find({_id: {$lt: id},code:{$in:codes},action_time:{$gt:Date.now()}})
+                .limit(50)
+                .sort({'_id':-1})
+                .exec(cb);
+        }else {
+            return this.find({code:{$in:codes},action_time:{$gt:Date.now()}})
+                .limit(50)
+                .sort({'_id':-1})
+                .exec(cb);
+        }
+
+    }
+}
 
 var MessageModel = db.model('Message', MessageSchema);
 
