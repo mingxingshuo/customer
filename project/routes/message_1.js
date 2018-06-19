@@ -52,7 +52,6 @@ router.get('/get_code', async (ctx, next) => {
 
 
 router.post('/create', async (ctx,next)=>{
-	console.log(ctx.request.body.contents)
 	var message = {
 	  	codes:ctx.request.body.codes,
 	  	task: ctx.request.body.task,
@@ -62,7 +61,6 @@ router.post('/create', async (ctx,next)=>{
 	}
 	var docs = await MessageModel.create(message);
 	if (docs) {
-		console.log(docs)
 		ctx.body= {success: '成功', data: docs}
 	} else {
 		ctx.body= {err: '创建失败，请检查输入是否有误'}
