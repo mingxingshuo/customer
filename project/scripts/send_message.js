@@ -7,10 +7,8 @@ var flags ={};
 function get_message(id) {
 	if(!flags[id]){
 		flags[id] = true;
-		console.log(id,'------------------id1')
 		MessageModel.findById(id).exec(function(err,message){
             if(message){
-                console.log(message,'----------------------message1')
                 send_users(null,message);
 			}else{
 				flags[id] = false;
@@ -23,12 +21,9 @@ function get_message(id) {
 }
 
 function send_users(user_id,message){
-	console.log(message.codes,'---------------codes')
 	UserModel.fetch(user_id,message.codes,function(err,users){
-		console.log(users,'--------------------users')
 		async.eachLimit(users,10,function(user,callback){
             var client = wechat_util.getClient(user.code);
-            console.log(message,'----------------------message2')
             if(message.type==0){
 				client.sendNews(user.openid, message.contents, function(err,res){
 					console.log(err);
