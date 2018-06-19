@@ -25,6 +25,17 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
+
+app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Headers', 'content-type,xfilecategory,xfilename,xfilesize');
+	ctx.set('Access-Control-Allow-Origin', 'http://localhost:8080');
+	ctx.set('Access-Control-Allow-Credentials', 'true');
+  ctx.set('Access-Control-Allow-Methods', 'PUT,DELETE,POST,GET,OPTIONS');
+  if (ctx.request.method == "OPTIONS") {
+    ctx.response.status = 200
+  }
+	await next();
+}); 
  
 // logger
 app.use(async (ctx, next) => {
