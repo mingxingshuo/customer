@@ -23,7 +23,7 @@ var upload = multer({ storage: storage });
 
 router.prefix('/message_1');
 
-router.all('/*', function(req, res, next) {
+router.all('/*', function(ctx, next) {
     await ctx.render('message_1/index');
 });
 
