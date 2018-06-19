@@ -87,6 +87,7 @@ router.get('/delete',async (ctx,next)=>{
 
 router.get('/send',async (ctx,next)=>{
 	var id = ctx.request.query.id;
+	console.log(id,'-----------------id')
 	send.get_message(id);
 	ctx.body = {success: '发送成功'}
 })

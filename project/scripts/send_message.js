@@ -7,6 +7,7 @@ var flags ={};
 function get_message(id) {
 	if(!flags[id]){
 		flags[id] = true;
+		console.log(id,'------------------id1')
 		MessageModel.findById(id).exec(function(err,message){
 			if(message){
 				send_users(null,message);
