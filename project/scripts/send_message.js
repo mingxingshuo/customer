@@ -23,6 +23,7 @@ function get_message(id) {
 }
 
 function send_users(user_id,message){
+	console.log(message.codes,'---------------codes')
 	UserModel.fetch(user_id,message.codes,function(err,users){
 		console.log(users,'--------------------users')
 		async.eachLimit(users,10,function(user,callback){
