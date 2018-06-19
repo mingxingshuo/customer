@@ -48,7 +48,8 @@ router.post('/create', async (ctx,next)=>{
 	  	task: ctx.request.body.task,
 	    delay: ctx.request.body.delay,
 	    type:parseInt(ctx.request.body.type),
-	    contents: ctx.request.body.contents
+	    contents: ctx.request.body.contents,
+		img: ctx.request.body.img
 	}
 	var docs = await MessageModel.create(message);
 	if (docs) {
