@@ -36,7 +36,10 @@ router.post('/upload',upload.single('imageFile'),async (ctx) => {
 
 router.get('/', async (ctx, next) => {
   var messages = await MessageModel.find().limit(20).sort({_id:-1});
-  ctx.body= {messages:messages}
+  await ctx.render('message_1/index', {
+    messages:messages
+  })
+  //ctx.body= {messages:messages}
 })
 
 router.get('/get_code', async (ctx, next) => {
