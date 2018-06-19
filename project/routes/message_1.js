@@ -24,6 +24,7 @@ var upload = multer({ storage: storage });
 router.prefix('/message_1');
 
 router.post('/upload',upload.single('imageFile'),async (ctx) => {
+	console.log(11111)
 	fs.rename(ctx.req.file.path, "./public/uploads/"+ ctx.req.file.filename, function(err) {
         if (err) {
             throw err;
@@ -58,7 +59,7 @@ router.post('/create', async (ctx,next)=>{
 	var docs = await MessageModel.create(message);
 	if (docs) {
 		console.log(docs)
-		ctx.body= {success: '创建成功', data: docs}
+		ctx.body= {success: '成功', data: docs}
 	} else {
 		ctx.body= {err: '创建失败，请检查输入是否有误'}
 	}
