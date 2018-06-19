@@ -24,6 +24,7 @@ function send_users(user_id,message){
 	UserModel.fetch(user_id,message.codes,function(err,users){
 		async.eachLimit(users,10,function(user,callback){
             var client = wechat_util.getClient(user.code);
+            console.log(message,'----------------------message')
             if(message.type==0){
 				client.sendNews(user.openid, message.contents, function(err,res){
 					console.log(err);
