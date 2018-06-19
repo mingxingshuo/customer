@@ -79,7 +79,15 @@ router.post('/update', async (ctx,next)=>{
 router.get('/delete',async (ctx,next)=>{
 	var id = ctx.request.query.id;
 	var docs = await MessageModel.findByIdAndDelete(id)
-	ctx.body = {success: '删除成功', data: docs}
+    MessageModel.find({}, function(err, res){
+        if (err) {
+            console.log("Error:" + err);
+        }
+        else {
+            ctx.body = {success: '删除成功', data: res}
+        }
+    })	
+	
 })
 
 router.get('/send',async (ctx,next)=>{
