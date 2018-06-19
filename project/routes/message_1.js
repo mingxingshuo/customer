@@ -3,29 +3,20 @@ var MessageModel = require('../model/Message');
 var weichat_conf = require('../conf/weichat.json');
 var send =require('../scripts/send_message');
 var fs = require('fs')
-const multer = require('koa-multer');//加载koa-multer模块  
-//文件上传  
+const multer = require('koa-multer'); 
 
-//配置  
 var storage = multer.diskStorage({
-  //文件保存路径  
   destination: function (req, file, cb) {  
     cb(null, 'public/uploads/')  
   },  
-  //修改文件名称
   filename: function (req, file, cb) {  
     var fileFormat = (file.originalname).split(".");  
     cb(null,Date.now() + "." + fileFormat[fileFormat.length - 1]);  
   }
-})  
-//加载配置  
+})
 var upload = multer({ storage: storage }); 
 
 router.prefix('/message');
-
-router.all('/*', async (ctx, next) => {
-    await ctx.render('message_1/index');
-});
 
 router.post('/upload',upload.single('imageFile'),async (ctx) => {
 	fs.rename(ctx.req.file.path, "./public/uploads/"+ ctx.req.file.filename, function(err) {
