@@ -24,7 +24,7 @@ var upload = multer({ storage: storage });
 router.prefix('/message_1');
 
 router.all('/*', function(req, res, next) {
-    res.render('message_1/index');
+    await ctx.render('message_1/index');
 });
 
 router.post('/upload',upload.single('imageFile'),async (ctx) => {
@@ -40,7 +40,7 @@ router.post('/upload',upload.single('imageFile'),async (ctx) => {
 
 router.get('/', async (ctx, next) => {
   var messages = await MessageModel.find().limit(20).sort({_id:-1});
-  
+
   ctx.body= {messages:messages}
 })
 
