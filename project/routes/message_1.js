@@ -36,12 +36,9 @@ router.post('/upload',upload.single('imageFile'),async (ctx) => {
 
 router.get('/', async (ctx, next) => {
   var messages = await MessageModel.find().limit(20).sort({_id:-1});
-  //await ctx.render('message_1/index')
   ctx.body= {messages:messages}
 })
-router.all('/*', function(req, res, next) {
-    res.render('message_1/index');
-});
+
 router.get('/get_code', async (ctx, next) => {
 	var codes= [];
 	for (var key in weichat_conf) {
