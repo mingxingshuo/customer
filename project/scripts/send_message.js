@@ -9,9 +9,9 @@ function get_message(id) {
 		flags[id] = true;
 		console.log(id,'------------------id1')
 		MessageModel.findById(id).exec(function(err,message){
-            console.log(message,'----------------------message1')
             if(message){
-				send_users(null,message);
+                console.log(message,'----------------------message1')
+                send_users(null,message);
 			}else{
 				flags[id] = false;
 				console.log('============= 未找到信息 ==========')
@@ -24,6 +24,7 @@ function get_message(id) {
 
 function send_users(user_id,message){
 	UserModel.fetch(user_id,message.codes,function(err,users){
+		console.log(users,'--------------------users')
 		async.eachLimit(users,10,function(user,callback){
             var client = wechat_util.getClient(user.code);
             console.log(message,'----------------------message2')
