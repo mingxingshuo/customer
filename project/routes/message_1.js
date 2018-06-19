@@ -49,6 +49,7 @@ router.get('/get_code', async (ctx, next) => {
 
 
 router.post('/create', async (ctx,next)=>{
+	console.log(ctx.request.body.contents)
 	var message = {
 	  	codes:ctx.request.body.codes,
 	  	task: ctx.request.body.task,
