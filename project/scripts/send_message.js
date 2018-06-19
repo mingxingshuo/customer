@@ -38,7 +38,7 @@ function send_users(user_id,message){
 					
 				});
             }else if(message.type==1){
-            	client.sendText(user.openid,message.des,function(error,res){
+            	client.sendText(user.openid,message.contents[0].description,function(error,res){
             		console.log(error);
             		setTimeout(function(){
 						callback(null)
