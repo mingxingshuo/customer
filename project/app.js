@@ -10,6 +10,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const message = require('./routes/message')
 const message_1 = require('./routes/message_1')
+const kefu = require('./routes/kefu')
 
 // error handler
 onerror(app)
@@ -39,6 +40,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(message.routes(), message.allowedMethods())
 app.use(message_1.routes(), message_1.allowedMethods())
+app.use(kefu.routes(), kefu.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
