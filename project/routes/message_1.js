@@ -21,7 +21,7 @@ var storage = multer.diskStorage({
 //加载配置  
 var upload = multer({ storage: storage }); 
 
-router.prefix('/message_1');
+router.prefix('/message');
 
 router.all('/*', async (ctx, next) => {
     await ctx.render('message_1/index');
