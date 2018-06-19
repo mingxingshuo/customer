@@ -33,12 +33,12 @@ var MessageSchema = new Schema({
 MessageSchema.statics = {
     fetch(id,codes, cb) {
         if (id) {
-            return this.find({_id: {$lt: id},code:{$in:codes},action_time:{$gt:Date.now()}})
+            return this.find({_id: {$lt: id},code:{$in:codes}})
                 .limit(50)
                 .sort({'_id':-1})
                 .exec(cb);
         }else {
-            return this.find({code:{$in:codes},action_time:{$gt:Date.now()}})
+            return this.find({code:{$in:codes}})
                 .limit(50)
                 .sort({'_id':-1})
                 .exec(cb);

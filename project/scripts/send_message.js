@@ -25,15 +25,7 @@ function send_users(user_id,message){
 		async.eachLimit(users,10,function(user,callback){
             var client = wechat_util.getClient(user.code);
             if(message.type==0){
-            	var articles = [
-				 {
-				   "title":message.title,
-				   "description":message.des,
-				   "url":message.url,
-				   "picurl":message.img
-				 }];
-
-				client.sendNews(user.openid, articles, function(err,res){
+				client.sendNews(user.openid, message.contents, function(err,res){
 					console.log(err);
 					setTimeout(function(){
 						callback(null)

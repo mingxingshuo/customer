@@ -31,6 +31,7 @@ server.on('listening', onListening);
 
 
 require('../scripts/get_users');
+require('../scripts/user');
 
 /**
  * Normalize a port into a number, string, or false.

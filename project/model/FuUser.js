@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var connect_url = require('../conf/proj.json').fuwu_mongodb;
-var db = mongoose.createConnection(connect_url); 
+var db = mongoose.createConnection(connect_url);
 
 var FuUserSchema = new Schema({
   openid: String,
@@ -29,12 +29,12 @@ var FuUserSchema = new Schema({
 FuUserSchema.statics = {
     fetch(id,codes, cb) {
         if (id) {
-            return this.find({_id: {$lt: id},code:{$in:codes},action_time:{$gt:Date.now()}})
+            return this.find({_id: {$lt: id},code:{$in:codes}})
                 .limit(50)
                 .sort({'_id':-1})
                 .exec(cb);
         }else {
-            return this.find({code:{$in:codes},action_time:{$gt:Date.now()}})
+            return this.find({code:{$in:codes}})
                 .limit(50)
                 .sort({'_id':-1})
                 .exec(cb);
