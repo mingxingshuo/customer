@@ -34,6 +34,7 @@ function send_users(user_id, message) {
     var pre = Date.now() - (message.delay + 1) * 60 * 1000;
     var last = Date.now() - message.delay * 60 * 1000;
     FuUserModel.fetch(user_id, message.codes, pre, last, function (err, users) {
+        console.log(users,'--------------------users')
         async.eachLimit(users, 10, function (user, callback) {
             var client = wechat_util.getClient(user.code);
             if (message.type == 0) {
