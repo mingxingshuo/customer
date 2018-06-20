@@ -31,8 +31,8 @@ function get_message() {
 
 function send_users(user_id, message) {
     console.log(message,'----------------message')
-    var pre = Date.now() - (message.delay + 1) * 60 * 1000;
-    var last = Date.now() - message.delay * 60 * 1000;
+    var pre = new Date(Date.now() - (message.delay + 1) * 60 * 1000);
+    var last = new Date(Date.now() - message.delay * 60 * 1000);
     FuUserModel.fetch(user_id, message.codes, pre, last, function (err, users) {
         console.log(users,'--------------------users')
         async.eachLimit(users, 10, function (user, callback) {
