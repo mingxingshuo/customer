@@ -4,13 +4,6 @@ var FuUserModel = require('../model/FuUser');
 var async = require('async');
 var schedule = require("node-schedule");
 
-FuUserModel.deleteOne({'openid':'oD4KE1IxZ33wN_cRakxCZHCgcn8s'},function (err,data) {
-    console.log(data,'------------------data1')
-})
-FuUserModel.deleteOne({'openid':'oD4KE1G7wwq8LSU1TZ5gRD3IPfxQ'},function (err,data) {
-    console.log(data,'------------------data2')
-})
-
 function get_message() {
     MessageModel.find({task: true}, function (err, messages) {
         if (messages) {
