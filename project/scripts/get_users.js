@@ -128,7 +128,7 @@ function get_users(code,openid,next){
     }  
 }
 
-// get_all()
+get_all()
 
 var rule = new schedule.RecurrenceRule();
 var times = [1, 9, 12, 15, 18, 21, 24];
