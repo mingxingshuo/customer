@@ -30,12 +30,12 @@ var FuUserSchema = new Schema({
 FuUserSchema.statics = {
     fetch(id, codes, pre, last, cb) {
         if (id) {
-            return this.find({_id: {$lt: id}, code: {$in: codes}, creatAt: {$gte: pre, $lt: last}})
+            return this.find({_id: {$lt: id}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
                 .limit(50)
                 .sort({'_id': -1})
                 .exec(cb);
         } else {
-            return this.find({code: {$in: codes}, creatAt: {$gte: pre, $lt: last}})
+            return this.find({code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
                 .limit(50)
                 .sort({'_id': -1})
                 .exec(cb);
