@@ -4,18 +4,18 @@ var FuUserModel = require('../model/FuUser');
 var async = require('async');
 var schedule = require("node-schedule");
 
-FuUserModel.deleteOne({openid: 'oD4KE1G7wwq8LSU1TZ5gRD3IPfxQ'}, function (err, data) {
-    console.log(data, '-------------------data1')
-})
-FuUserModel.deleteOne({openid: 'oD4KE1MZaV-YEQ_LQQFGw367X9Bk'}, function (err, data) {
-    console.log(data, '-------------------data1')
-})
-FuUserModel.deleteOne({openid: 'oD4KE1NQKvYHSrTraGiBet3SzpuM'}, function (err, data) {
-    console.log(data, '-------------------data1')
-})
-FuUserModel.deleteOne({openid: 'oD4KE1IxZ33wN_cRakxCZHCgcn8s'}, function (err, data) {
-    console.log(data, '-------------------data1')
-})
+// FuUserModel.deleteOne({openid: 'oD4KE1G7wwq8LSU1TZ5gRD3IPfxQ'}, function (err, data) {
+//     console.log(data, '-------------------data1')
+// })
+// FuUserModel.deleteOne({openid: 'oD4KE1MZaV-YEQ_LQQFGw367X9Bk'}, function (err, data) {
+//     console.log(data, '-------------------data1')
+// })
+// FuUserModel.deleteOne({openid: 'oD4KE1NQKvYHSrTraGiBet3SzpuM'}, function (err, data) {
+//     console.log(data, '-------------------data1')
+// })
+// FuUserModel.deleteOne({openid: 'oD4KE1IxZ33wN_cRakxCZHCgcn8s'}, function (err, data) {
+//     console.log(data, '-------------------data1')
+// })
 
 function get_message() {
     MessageModel.find({task: true}, function (err, messages) {
@@ -30,12 +30,9 @@ function get_message() {
 }
 
 function send_users(user_id, message) {
-    console.log(message,'----------------message')
     var pre = new Date(Date.now() - (message.delay + 1) * 60 * 1000);
     var last = new Date(Date.now() - message.delay * 60 * 1000);
-    console.log(pre,last,'---------------')
     FuUserModel.fetch(user_id, message.codes, pre, last, function (err, users) {
-        console.log(users,'--------------------users')
         async.eachLimit(users, 10, function (user, callback) {
             var client = wechat_util.getClient(user.code);
             if (message.type == 0) {
