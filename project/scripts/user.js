@@ -17,27 +17,25 @@ function get_message() {
 }
 
 function send_users(user_id, message) {
-    FuUserModel.fetch(user_id, message.codes, function (err, users) {
+    var pre = Date.now() - (message.delay + 1) * 60 * 1000;
+    var last = Date.now() - message.delay * 60 * 1000;
+    FuUserModel.fetch(user_id, message.codes, pre, last, function (err, users) {
         async.eachLimit(users, 10, function (user, callback) {
-            if (Date.now() - user.createAt.getTime() >= message.delay * 60 * 1000 && Date.now() - user.createAt.getTime() < (message.delay + 1) * 60 * 1000) {
-                var client = wechat_util.getClient(user.code);
-                if (message.type == 0) {
-                    client.sendNews(user.openid, message.contents, function (err, res) {
-                        console.log(err);
-                        setTimeout(function () {
-                            callback(null)
-                        }, 50)
-                    });
-                } else if (message.type == 1) {
-                    client.sendText(user.openid, message.contents[0].description, function (error, res) {
-                        console.log(error);
-                        setTimeout(function () {
-                            callback(null)
-                        }, 50)
-                    })
-                }
-            }else{
-                callback(null)
+            var client = wechat_util.getClient(user.code);
+            if (message.type == 0) {
+                client.sendNews(user.openid, message.contents, function (err, res) {
+                    console.log(err);
+                    setTimeout(function () {
+                        callback(null)
+                    }, 50)
+                });
+            } else if (message.type == 1) {
+                client.sendText(user.openid, message.contents[0].description, function (error, res) {
+                    console.log(error);
+                    setTimeout(function () {
+                        callback(null)
+                    }, 50)
+                })
             }
         }, function (err) {
             if (users.length == 50) {
