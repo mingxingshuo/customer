@@ -30,7 +30,6 @@ function send_users(user_id,message){
 					setTimeout(function(){
 						callback(null)
 					},50)
-					
 				});
             }else if(message.type==1){
             	client.sendText(user.openid,message.contents[0].description,function(error,res){

@@ -27,7 +27,20 @@ var FuUserSchema = new Schema({
 });
 
 FuUserSchema.statics = {
-    fetch(id, codes, pre, last, cb) {
+    fetch(id, codes, cb) {
+        if (id) {
+            return this.find({_id: {$lt: id}, code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                .limit(50)
+                .sort({'_id': -1})
+                .exec(cb);
+        } else {
+            return this.find({code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                .limit(50)
+                .sort({'_id': -1})
+                .exec(cb);
+        }
+    },
+    fetch_time(id, codes, pre, last, cb) {
         if (id) {
             return this.find({_id: {$lt: id}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
                 .limit(50)
@@ -39,7 +52,6 @@ FuUserSchema.statics = {
                 .sort({'_id': -1})
                 .exec(cb);
         }
-
     }
 }
 

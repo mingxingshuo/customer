@@ -93,10 +93,10 @@ router.get('/send',async (ctx,next)=>{
 	var id = ctx.request.query.id;
 	var take_over = ctx.request.query.take_over
 	if (take_over) {
-		send.get_message(id);
+		sendUser.get_message(id);
 		ctx.body = {success: '发送成功'}
 	} else {
-		sendUser.get_message(id);
+		send.get_message(id);
 		ctx.body = {success: '发送成功'}
 	}
 	
