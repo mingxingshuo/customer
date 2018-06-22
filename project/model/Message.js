@@ -11,6 +11,7 @@ var MessageSchema = new Schema({
   title:String,
   delay: Number,
   des:String,
+  take_over: Boolean,
   contents:[{
     title:String,
     description:String,

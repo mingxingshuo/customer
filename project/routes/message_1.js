@@ -2,6 +2,7 @@ const router = require('koa-router')()
 var MessageModel = require('../model/Message');
 var weichat_conf = require('../conf/weichat.json');
 var send =require('../scripts/send_message');
+var sendUser =require('../scripts/send_user_message');
 var fs = require('fs')
 const multer = require('koa-multer'); 
 
@@ -38,6 +39,7 @@ router.get('/get_code', async (ctx, next) => {
 	for (var key in weichat_conf) {
 		codes.push(weichat_conf[key]);
 	}
+	console.log(codes)
   	ctx.body= {codes: codes}
 })
 
@@ -49,7 +51,8 @@ router.post('/create', async (ctx,next)=>{
 	    delay: ctx.request.body.delay,
 	    type:parseInt(ctx.request.body.type),
 	    contents: ctx.request.body.contents,
-		img: ctx.request.body.img
+		img: ctx.request.body.img,
+		take_over: ctx.request.body.take_over
 	}
 	var docs = await MessageModel.create(message);
 	if (docs) {
@@ -68,7 +71,8 @@ router.post('/update', async (ctx,next)=>{
 	    delay: ctx.request.body.delay,
 	    type:parseInt(ctx.request.body.type),
 	    contents: ctx.request.body.contents,
-	    img: ctx.request.body.img
+	    img: ctx.request.body.img,
+	    take_over: ctx.request.body.take_over
 	}
 	var docs = await MessageModel.findByIdAndUpdate(id,message)
 	if (docs) {
@@ -87,9 +91,15 @@ router.get('/delete',async (ctx,next)=>{
 
 router.get('/send',async (ctx,next)=>{
 	var id = ctx.request.query.id;
-	console.log(id,'-----------------id')
-	send.get_message(id);
-	ctx.body = {success: '发送成功'}
+	var take_over = ctx.request.query.take_over
+	if (take_over) {
+		send.get_message(id);
+		ctx.body = {success: '发送成功'}
+	} else {
+		sendUser.get_message(id);
+		ctx.body = {success: '发送成功'}
+	}
+	
 })
 
 
