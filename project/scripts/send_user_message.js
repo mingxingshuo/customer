@@ -27,14 +27,14 @@ function send_users(user_id,message){
 			var client = wechat_util.getClient(user.code);
             if(message.type==0){
 				client.sendNews(user.openid, message.contents, function(err,res){
-					//console.log(err);
+					console.log(err);
 					setTimeout(function(){
 						callback(null)
 					},50)
 				});
             }else if(message.type==1){
             	client.sendText(user.openid,message.contents[0].description,function(error,res){
-            		//console.log(error);
+            		console.log(error);
             		setTimeout(function(){
 						callback(null)
 					},50)
