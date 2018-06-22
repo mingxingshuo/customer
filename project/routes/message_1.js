@@ -91,7 +91,8 @@ router.get('/delete',async (ctx,next)=>{
 
 router.get('/send',async (ctx,next)=>{
 	var id = ctx.request.query.id;
-	var take_over = ctx.request.query.take_over
+	var take_over = ctx.request.query.take_over;
+	console.log('take_over-------------'+take_over)
 	if (take_over) {
 		sendUser.get_message(id);
 		ctx.body = {success: '发送成功'}
