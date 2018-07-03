@@ -103,7 +103,7 @@
 		"sub_replay":0,
 		"robot":0,
 		"zero_purchase":0,
-		"take_over":1
+		"take_over":0
 	},
 	"15":{
 		"code":"15",
