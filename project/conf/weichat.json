@@ -53,7 +53,8 @@
 		"url":"http://www.rrdtjj.top/weichat/10",
 		"sub_replay":0,
 		"robot":0,
-		"zero_purchase":0
+		"zero_purchase":0,
+		"take_over":1
 	},
 	"11":{
 		"code":"11",
@@ -65,7 +66,8 @@
 		"url":"http://www.rrdtjj.top/weichat/11",
 		"sub_replay":0,
 		"robot":0,
-		"zero_purchase":0
+		"zero_purchase":0,
+		"take_over":1
 	},
 	"12":{
 		"code":"12",
@@ -77,7 +79,8 @@
 		"url":"http://www.rrdtjj.top/weichat/12",
 		"sub_replay":0,
 		"robot":0,
-		"zero_purchase":0
+		"zero_purchase":0,
+		"take_over":1
 	},
 	"13":{
 		"code":"13",
