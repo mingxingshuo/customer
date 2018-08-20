@@ -8,9 +8,11 @@ const multer = require('koa-multer');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {  
+  	//console.log('destination');
     cb(null, 'public/uploads/')  
   },  
-  filename: function (req, file, cb) {  
+  filename: function (req, file, cb) { 
+  	//console.log('filename'); 
     var fileFormat = (file.originalname).split(".");  
     cb(null,Date.now() + "." + fileFormat[fileFormat.length - 1]);  
   }
@@ -20,13 +22,6 @@ var upload = multer({ storage: storage });
 router.prefix('/message');
 
 router.post('/upload',upload.single('imageFile'),async (ctx, next) => {
-	console.log('file path : '+ctx.req.file.path);
-	fs.rename(ctx.req.file.path, "./public/uploads/"+ ctx.req.file.filename, function(err) {
-        if (err) {
-            throw err;
-        }
-        console.log('上传成功!');
-    })
     ctx.body = {filename: ctx.req.file.filename};
 });
 
