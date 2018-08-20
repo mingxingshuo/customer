@@ -255,6 +255,19 @@
 		"robot":0,
 		"zero_purchase":1,
 		"take_over":1
+	},
+	"27":{
+		"code":"27",
+		"name":"内涵蜜语",
+		"appid":"wx97625a5e73bf9fb4",
+		"appsecret":"11e8c76ad78849e1c56fcc1b351898fe",
+		"token":"mingxingshuo",
+		"EncodingAESKey":"tw4a1yTUv0VJURGNif96ibI4z3oWPJJWpuo2mHTvzLb",
+		"url":"http://www.rrdtjj.top/weichat/27",
+		"sub_replay":0,
+		"robot":0,
+		"zero_purchase":0,
+		"take_over":1
 	}
 
 
