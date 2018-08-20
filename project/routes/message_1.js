@@ -19,7 +19,7 @@ var upload = multer({ storage: storage });
 
 router.prefix('/message');
 
-router.post('/upload',upload.single('imageFile'),async (ctx) => {
+router.post('/upload',upload.single('imageFile'),async (ctx, next) => {
 	console.log('file path : '+ctx.req.file.path);
 	fs.rename(ctx.req.file.path, "./public/uploads/"+ ctx.req.file.filename, function(err) {
         if (err) {
