@@ -9,7 +9,7 @@ const multer = require('koa-multer');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {  
   	//console.log('destination');
-    cb(null, 'public/uploads/')  
+    cb(null, __dirname+'/../public/uploads/')  
   },  
   filename: function (req, file, cb) { 
   	//console.log('filename'); 
