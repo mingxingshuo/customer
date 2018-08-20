@@ -8,7 +8,7 @@ const multer = require('koa-multer');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {  
-    cb(null, __dirname+'/../public/uploads/')  
+    cb(null, 'public/uploads/')  
   },  
   filename: function (req, file, cb) {  
     var fileFormat = (file.originalname).split(".");  
@@ -23,7 +23,6 @@ router.post('/upload',upload.single('imageFile'),async (ctx) => {
 	console.log('file path : '+ctx.req.file.path);
 	fs.rename(ctx.req.file.path, "./public/uploads/"+ ctx.req.file.filename, function(err) {
         if (err) {
-        	console.log(err);
             throw err;
         }
         console.log('上传成功!');
