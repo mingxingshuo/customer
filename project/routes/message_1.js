@@ -22,7 +22,7 @@ var upload = multer({ storage: storage });
 router.prefix('/message');
 
 router.post('/upload',upload.single('imageFile'),async (ctx, next) => {
-    ctx.body = {filename: ctx.req.file.filename};
+    ctx.body = {filename: ctx.request.file.filename};
 });
 
 router.get('/', async (ctx, next) => {
