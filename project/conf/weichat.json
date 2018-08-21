@@ -268,6 +268,19 @@
 		"robot":0,
 		"zero_purchase":0,
 		"take_over":1
+	},
+	"28":{
+		"code":"28",
+		"name":"内涵秘语",
+		"appid":"wx220fb9b431f2c12f",
+		"appsecret":"ac4f5501368f01540574f5d656882ecb",
+		"token":"mingxingshuo",
+		"EncodingAESKey":"tw4a1yTUv0VJURGNif96ibI4z3oWPJJWpuo2mHTvzLb",
+		"url":"http://www.rrdtjj.top/weichat/28",
+		"sub_replay":0,
+		"robot":0,
+		"zero_purchase":0,
+		"take_over":1
 	}
 
 
