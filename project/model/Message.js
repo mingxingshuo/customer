@@ -13,7 +13,7 @@ var MessageSchema = new Schema({
   des:String,
   take_over: Boolean,
   is_timing:Boolean,
-  timing_time:{type: Number, default:0},
+  timing_time:Date,
   contents:[{
     title:String,
     description:String,
