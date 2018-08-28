@@ -5,13 +5,15 @@ var db = mongoose.createConnection(connect_url);
 
 var MessageSchema = new Schema({
   task: Boolean,
-  type:Number,//0链接 1文本 2 图片 3 
+  type:Number,//0链接 1文本 2 图片 3
   img:String,
   url:String,
   title:String,
   delay: Number,
   des:String,
   take_over: Boolean,
+  is_timing:Boolean,
+  timing_time:{type: Number, default:0},
   contents:[{
     title:String,
     description:String,
