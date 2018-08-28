@@ -71,31 +71,33 @@ function get_timing_message() {
 }
 
 function send_timing(user_id, message) {
-    if(user_id || (Date.now() - message.timing>=60*1000 && Date.now() - message.timing<120*1000)){
-        FuUserModel.fetch(user_id, message.codes, function (err, users) {
-            async.eachLimit(users, 10, function (user, callback) {
-                var client = wechat_util.getClient(user.code);
-                if (message.type == 0) {
-                    client.sendNews(user.openid, message.contents, function (err, res) {
-                        console.log(err);
-                        setTimeout(function () {
-                            callback(null)
-                        }, 50)
-                    });
-                } else if (message.type == 1) {
-                    client.sendText(user.openid, message.contents[0].description, function (error, res) {
-                        console.log(error);
-                        setTimeout(function () {
-                            callback(null)
-                        }, 50)
-                    })
-                }
-            }, function (err) {
-                if (users.length == 50) {
-                    send_timing(users[49]._id, message);
-                }
-            })
-        });
+    if(message.timing){
+        if(user_id || (Date.now() - message.timing>=60*1000 && Date.now() - message.timing<120*1000)){
+            FuUserModel.fetch(user_id, message.codes, function (err, users) {
+                async.eachLimit(users, 10, function (user, callback) {
+                    var client = wechat_util.getClient(user.code);
+                    if (message.type == 0) {
+                        client.sendNews(user.openid, message.contents, function (err, res) {
+                            console.log(err);
+                            setTimeout(function () {
+                                callback(null)
+                            }, 50)
+                        });
+                    } else if (message.type == 1) {
+                        client.sendText(user.openid, message.contents[0].description, function (error, res) {
+                            console.log(error);
+                            setTimeout(function () {
+                                callback(null)
+                            }, 50)
+                        })
+                    }
+                }, function (err) {
+                    if (users.length == 50) {
+                        send_timing(users[49]._id, message);
+                    }
+                })
+            });
+        }
     }
 }
 
