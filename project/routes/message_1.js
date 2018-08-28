@@ -44,7 +44,9 @@ router.post('/create', async (ctx,next)=>{
 	var message = {
 	  	codes:ctx.request.body.codes,
 	  	task: ctx.request.body.task,
-	    delay: ctx.request.body.delay,
+        is_timing: ctx.request.body.is_timing,
+        delay: ctx.request.body.delay,
+	    timing_time: parseInt(ctx.request.body.timing_time),
 	    type:parseInt(ctx.request.body.type),
 	    contents: ctx.request.body.contents,
 		img: ctx.request.body.img,
@@ -62,13 +64,15 @@ router.post('/create', async (ctx,next)=>{
 router.post('/update', async (ctx,next)=>{
 	var id = ctx.request.body.id;
 	var message = {
-		codes:ctx.request.body.codes,
-	  	task: ctx.request.body.task,
-	    delay: ctx.request.body.delay,
-	    type:parseInt(ctx.request.body.type),
-	    contents: ctx.request.body.contents,
-	    img: ctx.request.body.img,
-	    take_over: ctx.request.body.take_over
+        codes:ctx.request.body.codes,
+        task: ctx.request.body.task,
+        is_timing: ctx.request.body.is_timing,
+        delay: ctx.request.body.delay,
+        timing_time: parseInt(ctx.request.body.timing_time),
+        type:parseInt(ctx.request.body.type),
+        contents: ctx.request.body.contents,
+        img: ctx.request.body.img,
+        take_over: ctx.request.body.take_over
 	}
 	var docs = await MessageModel.findByIdAndUpdate(id,message)
 	if (docs) {
