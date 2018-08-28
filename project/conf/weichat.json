@@ -86,7 +86,7 @@
 		"code":"13",
 		"name":"佩奇文库",
 		"appid":"wxcc7d387636f6a6b0",
-		"appsecret":"60455778d83b06e9a6407b3a3d0ff503",
+		"appsecret":"3f376029c2a79b99a67f98f2ceb355e3",
 		"token":"mingxingshuo",
 		"EncodingAESKey":"tw4a1yTUv0VJURGNif96ibI4z3oWPJJWpuo2mHTvzLb",
 		"url":"http://www.rrdtjj.top/weichat/13",
@@ -99,7 +99,7 @@
 		"code":"14",
 		"name":"指尖阅小说",
 		"appid":"wx4a2aed3ff8bb6497",
-		"appsecret":"2588cbfff271f22e3b2cd546d1e215ae",
+		"appsecret":"0c6f585577d0470c15617985ada4e128",
 		"token":"mingxingshuo",
 		"EncodingAESKey":"tw4a1yTUv0VJURGNif96ibI4z3oWPJJWpuo2mHTvzLb",
 		"url":"http://www.rrdtjj.top/weichat/14",
@@ -254,6 +254,32 @@
 		"sub_replay":0,
 		"robot":0,
 		"zero_purchase":1,
+		"take_over":1
+	},
+	"27":{
+		"code":"27",
+		"name":"内涵蜜语",
+		"appid":"wx97625a5e73bf9fb4",
+		"appsecret":"11e8c76ad78849e1c56fcc1b351898fe",
+		"token":"mingxingshuo",
+		"EncodingAESKey":"tw4a1yTUv0VJURGNif96ibI4z3oWPJJWpuo2mHTvzLb",
+		"url":"http://www.rrdtjj.top/weichat/27",
+		"sub_replay":0,
+		"robot":0,
+		"zero_purchase":0,
+		"take_over":1
+	},
+	"28":{
+		"code":"28",
+		"name":"内涵秘语",
+		"appid":"wx220fb9b431f2c12f",
+		"appsecret":"ac4f5501368f01540574f5d656882ecb",
+		"token":"mingxingshuo",
+		"EncodingAESKey":"tw4a1yTUv0VJURGNif96ibI4z3oWPJJWpuo2mHTvzLb",
+		"url":"http://www.rrdtjj.top/weichat/28",
+		"sub_replay":0,
+		"robot":0,
+		"zero_purchase":0,
 		"take_over":1
 	}
 
