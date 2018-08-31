@@ -15,6 +15,7 @@ var MessageSchema = new Schema({
   is_timing:Boolean,
   timing_time:Date,
   time:String,
+  tagId:Number,
   contents:[{
     title:String,
     description:String,
