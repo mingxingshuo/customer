@@ -75,8 +75,9 @@ router.post('/create', async (ctx,next)=>{
 	    type:parseInt(ctx.request.body.type),
 	    contents: ctx.request.body.contents,
 		img: ctx.request.body.img,
-		take_over: ctx.request.body.take_over
-	}
+		take_over: ctx.request.body.take_over,
+        tagId: ctx.request.body.tagId
+    }
 	var docs = await MessageModel.create(message);
 	if (docs) {
 		ctx.body= {success: '成功', data: docs}
@@ -97,8 +98,9 @@ router.post('/update', async (ctx,next)=>{
         type:parseInt(ctx.request.body.type),
         contents: ctx.request.body.contents,
         img: ctx.request.body.img,
-        take_over: ctx.request.body.take_over
-	}
+        take_over: ctx.request.body.take_over,
+        tagId: ctx.request.body.tagId
+    }
 	var docs = await MessageModel.findByIdAndUpdate(id,message)
 	if (docs) {
 		ctx.body= {success: '修改成功', data: docs}

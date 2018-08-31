@@ -32,7 +32,7 @@ function get_message() {
 function send_users(user_id, message) {
     var pre = new Date(Date.now() - (message.delay + 1) * 60 * 1000);
     var last = new Date(Date.now() - message.delay * 60 * 1000);
-    FuUserModel.fetch_time(user_id, message.codes, pre, last, function (err, users) {
+    FuUserModel.fetch_time(user_id,message.tagId, message.codes, pre, last, function (err, users) {
         async.eachLimit(users, 10, function (user, callback) {
             var client = wechat_util.getClient(user.code);
             if (message.type == 0) {
@@ -72,7 +72,7 @@ function get_timing_message() {
 
 function send_timing(user_id, message) {
     if (user_id || (message.timing_time && Date.now() - new Date(message.timing_time).getTime() >= 60 * 1000 && Date.now() - new Date(message.timing_time).getTime() < 120 * 1000)) {
-        FuUserModel.fetch(user_id, message.codes, function (err, users) {
+        FuUserModel.fetch(user_id,message.tagId, message.codes, function (err, users) {
             async.eachLimit(users, 10, function (user, callback) {
                 var client = wechat_util.getClient(user.code);
                 if (message.type == 0) {
