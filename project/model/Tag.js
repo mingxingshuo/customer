@@ -5,6 +5,7 @@ var db = mongoose.createConnection(connect_url);
 
 
 var TagSchema = new Schema({
+  _id :Number,
   name:{ type: String, required: true }
 });
 
