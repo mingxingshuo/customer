@@ -22,7 +22,7 @@ function get_message(id) {
 }
 
 function send_users(user_id,message){
-	FuUserModel.fetch(user_id,message.codes,function(err,users){
+	FuUserModel.fetch(user_id,message.tagId,message.codes,function(err,users){
 		async.eachLimit(users,10,function(user,callback){
 			var client = wechat_util.getClient(user.code);
             if(message.type==0){
