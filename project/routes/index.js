@@ -17,15 +17,4 @@ router.get('/json', async (ctx, next) => {
   }
 })
 
-<<<<<<< HEAD
-=======
-
-router.get('/tag',async (ctx,next)=>{
-	let tags = await TagModel.find();
-	ctx.body = {
-		success: "查询成功", data: tags
-	}
-})
-
->>>>>>> 4a497ce03e1c657f88222986c5c3ee3130c056c8
 module.exports = router
