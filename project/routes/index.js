@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+var TagModel = require('../model/Tag.js')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
@@ -14,6 +15,14 @@ router.get('/json', async (ctx, next) => {
   ctx.body = {
     title: 'koa2 json'
   }
+})
+
+
+router.get('/tag',async (ctx,next)=>{
+	let tags = TagModel.find();
+	ctx.body = {
+		success: "查询成功", data: tags;
+	}
 })
 
 module.exports = router
