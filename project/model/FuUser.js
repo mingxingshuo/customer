@@ -30,29 +30,58 @@ var FuUserSchema = new Schema({
 
 FuUserSchema.statics = {
     fetch(id,tagId, codes, cb) {
-        if (id) {
-            return this.find({_id: {$lt: id},tagIds:{$elemMatch:{$eq:tagId}}, code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
-                .limit(50)
-                .sort({'_id': -1})
-                .exec(cb);
-        } else {
-            return this.find({tagIds:{$elemMatch:{$eq:tagId}},code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
-                .limit(50)
-                .sort({'_id': -1})
-                .exec(cb);
+        if(tagId){
+            if (id) {
+                return this.find({_id: {$lt: id},tagIds:{$elemMatch:{$eq:tagId}}, code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            } else {
+                return this.find({tagIds:{$elemMatch:{$eq:tagId}},code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            }
+        }else{
+            if (id) {
+                return this.find({_id: {$lt: id}, code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            } else {
+                return this.find({code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            }
         }
+
     },
     fetch_time(id,tagId, codes, pre, last, cb) {
-        if (id) {
-            return this.find({_id: {$lt: id},tagIds:{$elemMatch:{$eq:tagId}}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
-                .limit(50)
-                .sort({'_id': -1})
-                .exec(cb);
-        } else {
-            return this.find({tagIds:{$elemMatch:{$eq:tagId}},code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
-                .limit(50)
-                .sort({'_id': -1})
-                .exec(cb);
+        if(tagId){
+            if (id) {
+                return this.find({_id: {$lt: id},tagIds:{$elemMatch:{$eq:tagId}}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            } else {
+                return this.find({tagIds:{$elemMatch:{$eq:tagId}},code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            }
+        }else{
+            if (id) {
+                return this.find({_id: {$lt: id}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            } else {
+                return this.find({code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
+                    .limit(50)
+                    .sort({'_id': -1})
+                    .exec(cb);
+            }
         }
     }
 }
