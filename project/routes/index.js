@@ -19,9 +19,9 @@ router.get('/json', async (ctx, next) => {
 
 
 router.get('/tag',async (ctx,next)=>{
-	let tags = TagModel.find();
+	let tags = await TagModel.find();
 	ctx.body = {
-		success: "查询成功", data: tags;
+		success: "查询成功", data: tags
 	}
 })
 
