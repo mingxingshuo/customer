@@ -35,7 +35,7 @@ FuUserSchema.statics = {
             if (id) {
                 return this.find({
                     _id: {$lt: id},
-                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    $or:[{send_time: {$lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
                     tagIds: {$elemMatch: {$eq: tagId}},
                     code: {$in: codes},
                     action_time: {$gt: Date.now() - 48 * 3600 * 1000}
@@ -45,7 +45,7 @@ FuUserSchema.statics = {
                     .exec(cb);
             } else {
                 return this.find({
-                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    $or:[{send_time: {$lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
                     tagIds: {$elemMatch: {$eq: tagId}},
                     code: {$in: codes},
                     action_time: {$gt: Date.now() - 48 * 3600 * 1000}
@@ -58,7 +58,7 @@ FuUserSchema.statics = {
             if (id) {
                 return this.find({
                     _id: {$lt: id},
-                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    $or:[{send_time: {$lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
                     code: {$in: codes},
                     action_time: {$gt: Date.now() - 48 * 3600 * 1000}
                 })
@@ -67,7 +67,7 @@ FuUserSchema.statics = {
                     .exec(cb);
             } else {
                 return this.find({
-                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    $or:[{send_time: {$lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
                     code: {$in: codes},
                     action_time: {$gt: Date.now() - 48 * 3600 * 1000}
                 })
