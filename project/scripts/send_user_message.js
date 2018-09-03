@@ -23,7 +23,6 @@ function get_message(id) {
 
 function send_users(user_id,message){
 	FuUserModel.fetch(user_id,message.tagId,message.codes,function(err,users){
-		console.log(users,'--------------------------')
 		var l = []
 		async.eachLimit(users,10,function(user,callback){
 			l.push(user._id)
