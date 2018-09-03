@@ -15,7 +15,8 @@ var FuUserSchema = new Schema({
     country: String,
     headimgurl: String,
     action_time: Number,
-    tagIds:Array,
+    tagIds: Array,
+    send_time: Number,
     createAt: {
         type: Date,
         default: Date.now
@@ -29,27 +30,47 @@ var FuUserSchema = new Schema({
 });
 
 FuUserSchema.statics = {
-    fetch(id,tagId, codes, cb) {
-        if(tagId){
+    fetch(id, tagId, codes, cb) {
+        if (tagId) {
             if (id) {
-                return this.find({_id: {$lt: id},tagIds:{$elemMatch:{$eq:tagId}}, code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                return this.find({
+                    _id: {$lt: id},
+                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    tagIds: {$elemMatch: {$eq: tagId}},
+                    code: {$in: codes},
+                    action_time: {$gt: Date.now() - 48 * 3600 * 1000}
+                })
                     .limit(50)
                     .sort({'_id': -1})
                     .exec(cb);
             } else {
-                return this.find({tagIds:{$elemMatch:{$eq:tagId}},code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                return this.find({
+                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    tagIds: {$elemMatch: {$eq: tagId}},
+                    code: {$in: codes},
+                    action_time: {$gt: Date.now() - 48 * 3600 * 1000}
+                })
                     .limit(50)
                     .sort({'_id': -1})
                     .exec(cb);
             }
-        }else{
+        } else {
             if (id) {
-                return this.find({_id: {$lt: id}, code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                return this.find({
+                    _id: {$lt: id},
+                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    code: {$in: codes},
+                    action_time: {$gt: Date.now() - 48 * 3600 * 1000}
+                })
                     .limit(50)
                     .sort({'_id': -1})
                     .exec(cb);
             } else {
-                return this.find({code: {$in: codes}, action_time: {$gt: Date.now() - 48 * 3600 * 1000}})
+                return this.find({
+                    $or:[{send_time: {lt: Date.now() - 2 * 3600 * 1000}},{send_time:null}],
+                    code: {$in: codes},
+                    action_time: {$gt: Date.now() - 48 * 3600 * 1000}
+                })
                     .limit(50)
                     .sort({'_id': -1})
                     .exec(cb);
@@ -57,20 +78,29 @@ FuUserSchema.statics = {
         }
 
     },
-    fetch_time(id,tagId, codes, pre, last, cb) {
-        if(tagId){
+    fetch_time(id, tagId, codes, pre, last, cb) {
+        if (tagId) {
             if (id) {
-                return this.find({_id: {$lt: id},tagIds:{$elemMatch:{$eq:tagId}}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
+                return this.find({
+                    _id: {$lt: id},
+                    tagIds: {$elemMatch: {$eq: tagId}},
+                    code: {$in: codes},
+                    createAt: {$gte: pre, $lt: last}
+                })
                     .limit(50)
                     .sort({'_id': -1})
                     .exec(cb);
             } else {
-                return this.find({tagIds:{$elemMatch:{$eq:tagId}},code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
+                return this.find({
+                    tagIds: {$elemMatch: {$eq: tagId}},
+                    code: {$in: codes},
+                    createAt: {$gte: pre, $lt: last}
+                })
                     .limit(50)
                     .sort({'_id': -1})
                     .exec(cb);
             }
-        }else{
+        } else {
             if (id) {
                 return this.find({_id: {$lt: id}, code: {$in: codes}, createAt: {$gte: pre, $lt: last}})
                     .limit(50)
