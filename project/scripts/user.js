@@ -73,6 +73,7 @@ function get_timing_message() {
 function send_timing(user_id, message) {
     if (user_id || (message.timing_time && Date.now() - new Date(message.timing_time).getTime() >= 60 * 1000 && Date.now() - new Date(message.timing_time).getTime() < 120 * 1000)) {
         FuUserModel.fetch(user_id,message.tagId, message.codes, function (err, users) {
+            console.log(users,'--------------------------')
             var l = []
             async.eachLimit(users, 10, function (user, callback) {
                 l.push(user._id)
