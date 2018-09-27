@@ -15,7 +15,7 @@ router.get('/',async (ctx, next) => {
 })
 
 router.get('/get_name', async (ctx, next) => {
-    await TagModel.findOne({_id: req.query.tagId},function(err,result){
+    await TagModel.findOne({_id: ctx.request.query.tagId},function(err,result){
         if(err){
             console.log(err)
              ctx.body = {err: err}
